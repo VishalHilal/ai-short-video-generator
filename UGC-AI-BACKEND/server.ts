@@ -17,7 +17,9 @@ app.use(cors())
 app.post('/api/clerk', express.raw({ type: 'application/json' }), clerkWebhooks)
 
 app.use(express.json());
-app.use(clerkMiddleware())
+app.use(clerkMiddleware({
+    authorizedParties: ['http://localhost:5173', process.env.FRONTEND_URL]
+}))
 
 const port = process.env.PORT || 3000;
 
